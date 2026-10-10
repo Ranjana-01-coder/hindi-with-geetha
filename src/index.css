@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 :root {
-  font-family: 'DM Sans', 'Noto Sans Devanagari', sans-serif;
-  color: #3b201d;
-  background: #fffaf2;
+  font-family: 'DM Sans', sans-serif;
+  color: #421a36;
+  background: #fffaf3;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -26,8 +26,7 @@ body {
 
 button,
 input,
-textarea,
-select {
+textarea {
   font: inherit;
 }
 
@@ -36,18 +35,8 @@ a {
   -webkit-tap-highlight-color: transparent;
 }
 
-button {
-  cursor: pointer;
-}
-
 a {
-  color: inherit;
   text-decoration: none;
-}
-
-::selection {
-  background: #ead1a2;
-  color: #5b1824;
 }
 
 .hindi {
@@ -55,18 +44,33 @@ a {
 }
 
 .paper-pattern {
-  background-image: radial-gradient(#b78b5c20 0.8px, transparent 0.8px);
-  background-size: 17px 17px;
+  background-color: #fff7ed;
+  background-image:
+    radial-gradient(circle at 15% 15%, rgb(255 224 186 / 35%), transparent 28%),
+    radial-gradient(circle at 85% 25%, rgb(245 211 174 / 30%), transparent 30%);
 }
 
 .hero-glow {
-  background:
-    radial-gradient(ellipse at 78% 30%, #ead6b0 0%, transparent 38%),
-    radial-gradient(ellipse at 10% 90%, #f1dfc9 0%, transparent 40%);
+  position: relative;
+  isolation: isolate;
+}
+
+.hero-glow::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(105deg, #fff0df 0%, #fffaf3 48%, #f7e7d2 100%);
+  content: '';
 }
 
 ::selection {
-  border-radius: 4px;
+  color: #fff;
+  background: #641f30;
+}
+
+:focus-visible {
+  outline: 2px solid #c74712;
+  outline-offset: 3px;
 }
 
 @media (prefers-reduced-motion: reduce) {
