@@ -1,13 +1,12 @@
-
 import { useState } from 'react'
 import type { FormEvent } from 'react'
+import './index.css'
 import {
   ArrowRight,
   BookOpen,
   Check,
   Clock3,
   GraduationCap,
-  Headphones,
   Languages,
   Menu,
   MessageCircle,
@@ -21,7 +20,11 @@ import {
   FileText,
   Users,
   Brain,
+  UserRound,
+  ChevronDown,
+
 } from 'lucide-react'
+
 
 const hindiWords = [
   'शून्य', 'एक', 'दो', 'तीन', 'चार', 'पाँच', 'छह', 'सात', 'आठ', 'नौ',
@@ -222,10 +225,10 @@ function App() {
   const [studentName, setStudentName] = useState('')
   const [studentMessage, setStudentMessage] = useState('')
   const [formNotice, setFormNotice] = useState('')
-
+  const [studentMenuOpen, setStudentMenuOpen] = useState(false)
   // Replace with your mother's WhatsApp number, including India's country code.
   // Example: 919876543210 — digits only, no spaces or + sign.
-  const whatsappNumber = '91XXXXXXXXXX'
+  const whatsappNumber = '917010072209'
 
   const visibleNumbers = numbers.filter(
     (number) =>
@@ -294,75 +297,108 @@ function App() {
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-[#fffaf3] text-[#421a36]">
-      <header className="sticky top-0 z-50 border-b border-orange-100 bg-[#fffaf3]/95 backdrop-blur-lg">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3 sm:px-8">
-          <a href="#home" className="flex shrink-0 items-center gap-3" aria-label="Hindi with Geetha home">
-            <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#421a36] text-xl font-bold text-amber-200">
-              हि
-            </span>
-            <span>
-              <span className="block text-base font-bold tracking-tight sm:text-lg">
-                Hindi with Geetha
-              </span>
-              <span className="block text-[10px] tracking-[0.16em] text-stone-500">
-                LEARN · PRACTICE · GROW
-              </span>
-            </span>
-          </a>
+      
+<header className="sticky top-0 z-50 border-b border-orange-100 bg-[#fffaf3]/95 backdrop-blur-lg">
+  <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3 sm:px-8">
+    <a
+      href="#home"
+      className="flex shrink-0 items-center gap-3"
+      aria-label="Hindi with Geetha home"
+    >
+      <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#421a36] text-xl font-bold text-amber-200">
+        हि
+      </span>
+      <span>
+        <span className="block text-base font-bold tracking-tight sm:text-lg">
+          Hindi with Geetha
+        </span>
+        <span className="block text-[10px] tracking-[0.16em] text-stone-500">
+          LEARN · PRACTICE · GROW
+        </span>
+      </span>
+    </a>
 
-          <nav className="hidden items-center gap-5 lg:flex">
-            {navItems.map(([label, href]) => (
-              <a
-                key={label}
-                href={href}
-                className="text-xs font-medium text-stone-600 transition hover:text-orange-700"
-              >
-                {label}
-              </a>
-            ))}
-          </nav>
+    {/* Desktop navigation */}
+    <nav className="hidden items-center gap-5 lg:flex">
+      {navItems.map(([label, href]) => (
+        <a
+          key={label}
+          href={href}
+          className="text-xs font-medium text-stone-600 transition hover:text-orange-700"
+        >
+          {label}
+        </a>
+      ))}
+    </nav>
 
-          <a
-            href="#contact"
-            className="hidden items-center rounded-full bg-[#351537] px-5 py-3 text-xs font-semibold text-white transition hover:bg-orange-700 sm:inline-flex"
-          >
-            <MessageCircle className="mr-2" size={15} />
-            Book a class
-          </a>
+    {/* Desktop buttons */}
+    <div className="hidden shrink-0 items-center gap-3 sm:flex">
+      <a
+        href="#contact"
+        className="inline-flex items-center justify-center whitespace-nowrap rounded-full bg-[#351537] px-5 py-3 text-xs font-semibold text-white transition hover:bg-orange-700"
+      >
+        <MessageCircle className="mr-2" size={15} />
+        Book a class
+      </a>
 
-          <button
-            type="button"
-            className="rounded-lg p-2 lg:hidden"
-            aria-label={menuOpen ? 'Close navigation' : 'Open navigation'}
-            aria-expanded={menuOpen}
-            onClick={() => setMenuOpen((open) => !open)}
-          >
-            {menuOpen ? <X /> : <Menu />}
-          </button>
-        </div>
+      <a
+        href="/src/login"
+        aria-label="Student Login"
+        title="Student Login"
+        className="student-login-btn"
+      >
+        <UserRound size={18} />
+        <span>Student Login</span>
+      </a>
+    </div>
 
-        {menuOpen && (
-          <nav className="border-t border-orange-100 bg-[#fffaf3] px-5 py-3 lg:hidden">
-            {navItems.map(([label, href]) => (
-              <a
-                key={label}
-                href={href}
-                onClick={() => setMenuOpen(false)}
-                className="block rounded-lg px-3 py-3 text-sm font-medium hover:bg-orange-50"
-              >
-                {label}
-              </a>
-            ))}
-            <a
-              href="#contact"
-              onClick={() => setMenuOpen(false)}
-              className="mt-2 block rounded-full bg-[#421a36] px-5 py-3 text-center text-sm font-semibold text-white"
-            >
-              Book a class
-            </a>
-          </nav>
-        )}
-      </header>
+    {/* Mobile menu button */}
+    <button
+      type="button"
+      className="rounded-lg p-2 lg:hidden"
+      aria-label={menuOpen ? 'Close navigation' : 'Open navigation'}
+      aria-expanded={menuOpen}
+      onClick={() => setMenuOpen((open) => !open)}
+    >
+      {menuOpen ? <X /> : <Menu />}
+    </button>
+  </div>
+
+  {/* Mobile navigation */}
+  {menuOpen && (
+    <nav className="border-t border-orange-100 bg-[#fffaf3] px-5 py-3 lg:hidden">
+      {navItems.map(([label, href]) => (
+        <a
+          key={label}
+          href={href}
+          onClick={() => setMenuOpen(false)}
+          className="block rounded-lg px-3 py-3 text-sm font-medium hover:bg-orange-50"
+        >
+          {label}
+        </a>
+      ))}
+
+      <a
+        href="#contact"
+        onClick={() => setMenuOpen(false)}
+        className="mt-2 flex items-center justify-center gap-2 rounded-full bg-[#421a36] px-5 py-3 text-sm font-semibold text-white transition hover:bg-orange-700"
+      >
+        <MessageCircle size={17} />
+        Book a class
+      </a>
+
+      <a
+        href="/login"
+        onClick={() => setMenuOpen(false)}
+        className="student-login-btn mt-3 w-full"
+      >
+        <UserRound size={18} />
+        Student Login
+      </a>
+    </nav>
+  )}
+</header>
+
 
       <main>
         <section id="home" className="paper-pattern hero-glow scroll-mt-24">

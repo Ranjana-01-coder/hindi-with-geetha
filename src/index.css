@@ -18,15 +18,22 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+}
+
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  background: #fffaf3;
 }
 
 button,
 input,
-textarea {
+textarea,
+select {
   font: inherit;
 }
 
@@ -39,17 +46,35 @@ a {
   text-decoration: none;
 }
 
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
 .hindi {
   font-family: 'Noto Sans Devanagari', sans-serif;
 }
 
+/* Soft cream background pattern */
 .paper-pattern {
   background-color: #fff7ed;
   background-image:
-    radial-gradient(circle at 15% 15%, rgb(255 224 186 / 35%), transparent 28%),
-    radial-gradient(circle at 85% 25%, rgb(245 211 174 / 30%), transparent 30%);
+    radial-gradient(
+      circle at 15% 15%,
+      rgb(255 224 186 / 35%),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 85% 25%,
+      rgb(245 211 174 / 30%),
+      transparent 30%
+    );
 }
 
+/* Homepage hero background */
 .hero-glow {
   position: relative;
   isolation: isolate;
@@ -59,26 +84,86 @@ a {
   position: absolute;
   z-index: -1;
   inset: 0;
-  background: linear-gradient(105deg, #fff0df 0%, #fffaf3 48%, #f7e7d2 100%);
+  background: linear-gradient(
+    105deg,
+    #fff0df 0%,
+    #fffaf3 48%,
+    #f7e7d2 100%
+  );
   content: '';
 }
 
+/* Student Login button */
+.student-login-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border: 1px solid rgb(66 26 54 / 20%);
+  border-radius: 9999px;
+  background: #fff;
+  color: #421a36;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  white-space: nowrap;
+  text-decoration: none;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.student-login-btn:hover {
+  border-color: #fb923c;
+  background: #fff7ed;
+  color: #7d3d49;
+}
+
+.student-login-btn:active {
+  transform: scale(0.98);
+}
+
+.student-login-btn:focus-visible {
+  outline: 2px solid #c74712;
+  outline-offset: 3px;
+}
+
+/* Text selection */
 ::selection {
   color: #fff;
   background: #641f30;
 }
 
+/* Keyboard accessibility */
 :focus-visible {
   outline: 2px solid #c74712;
   outline-offset: 3px;
 }
 
+/* Mobile styling */
+@media (max-width: 640px) {
+  .student-login-btn {
+    gap: 6px;
+    padding: 9px 12px;
+    font-size: 13px;
+  }
+
+  html {
+    scroll-padding-top: 72px;
+  }
+}
+
+/* Respect reduced-motion preferences */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
     scroll-behavior: auto !important;
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
 }
